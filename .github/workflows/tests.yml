@@ -15,7 +15,7 @@ jobs:
             - name: Checkout repo
               uses: actions/checkout@v4
             - name: Install pytest
-              run: pip install pytest pytest-spec pytest-describe
+              run: pip install pytest pytest-mock pytest-spec pytest-describe
             - name: Run pytest
               run: pytest --spec test_brute.py
     RunSystemTests:
