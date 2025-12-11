@@ -14,6 +14,7 @@ def describe_brute_once():
     def it_works_when_called_with_empty_string():
         b = Brute("")
         assert b.bruteOnce("") == True
+        assert b.bruteOnce("abc123") == False
 
 
 def describe_brute_many():
