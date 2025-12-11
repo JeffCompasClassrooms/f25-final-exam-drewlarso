@@ -1,0 +1,29 @@
+name: Run Tests
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    RunDoubleTests:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v4
+            - name: Install pytest
+              run: pip install pytest pytest-spec pytest-describe
+            - name: Run pytest
+              run: pytest --spec test_brute.py
+    RunSystemTests:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v4
+            - name: Install pytest
+              run: pip install pytest pytest-spec pytest-describe
+            - name: Run pytest
+              run: pytest --spec test_christmas_list.py
