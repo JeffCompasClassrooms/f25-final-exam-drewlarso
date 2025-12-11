@@ -16,6 +16,11 @@ def describe_brute_once():
         assert b.bruteOnce("") == True
         assert b.bruteOnce("abc123") == False
 
+    def it_fails_when_password_is_not_a_string():
+        b = Brute("password")
+        with pytest.raises(TypeError):
+            b.bruteOnce(12345)
+
 
 def describe_brute_many():
     def it_returns_positive_number_if_password_guessed_correctly(mocker):
@@ -31,3 +36,10 @@ def describe_brute_many():
             "brute.Brute.randomGuess", return_value="username")
         assert b.bruteMany(100) == -1
         assert mock_guess.call_count == 100
+
+    def it_calculates_time_correctly(mocker):
+        b = Brute("password")
+        mock_time = mocker.patch("time.time", return_value=10)
+        mock_guess = mocker.patch(
+            "brute.Brute.randomGuess", return_value="password")
+        assert b.bruteMany(100) == 0  # 10 - 10 == 0
